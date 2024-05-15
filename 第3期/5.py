@@ -17,11 +17,13 @@ with open("news_train.txt", 'r') as f:
     text_train = []
     for text in f:
         text_train.append(text.strip())      
+    text_train = np.array(text_train)
 
 with open("news_test.txt", 'r') as f:
     text_test = []
     for text in f:
         text_test.append(text.strip())
+    text_test = np.array(text_test)
 
 # 2. 将训练集和测试集中的文本向量化
 from sklearn.feature_extraction.text import CountVectorizer
@@ -38,8 +40,8 @@ y = labels
 from sklearn.model_selection import train_test_split
 X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=1)
 
-from sklearn.linear_model import  LinearRegression
-model = LinearRegression()
+from sklearn.linear_model import LogisticRegression
+model = LogisticRegression()
 model.fit(X_train, y_train)
 score = model.score(X_val, y_val)
 print(f"模型近似准确率为：{score}")
@@ -48,4 +50,4 @@ print(f"模型近似准确率为：{score}")
 pred = model.predict(X_test)
 with open("pred_test.txt", 'w') as f:
     for i in range(pred.shape[0]):
-        f.write(pred[i] + '\n')
+        f.write(f"{pred[i]}" + '\n')
