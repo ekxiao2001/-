@@ -5,7 +5,6 @@ import tensorflow as tf
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.utils import to_categorical
 
-
 def load_data():
 
     with open("dataset", "rb") as f:
